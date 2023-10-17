@@ -1,12 +1,27 @@
-from flask import Flask, render_template
+#!/usr/bin/python3
+
+from flask import Flask, request, make_response, jsonify
 import os
+import funcs
+from datetime import datetime
+
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def home():
+def hello():
     return "hello"
+
+@app.route('/trigger',methods=['GET'] )
+def trigger():
+    try:
+        record = funcs.shadow_analysis(datetime.now())
+        response = make_response(jsonify(record), 200)
+        return response
+    except Exception as e:
+        return make_response(jsonify({"error": str(e)}), 500)
+
 
 
 if __name__ == "__main__":
