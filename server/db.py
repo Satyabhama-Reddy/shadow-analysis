@@ -20,7 +20,7 @@ def insert(timestamp, matrix):
         }
         inserted_id = collection.insert_one(data_to_insert).inserted_id
         data_to_insert["_id"] = str(inserted_id)
-        print(data_to_insert)
+        # print(data_to_insert)
         return data_to_insert
     except Exception as e:
         print("Exception occured while inserting record", e)
@@ -37,8 +37,8 @@ def get_records(start, end):
 
     # Use the find() method to retrieve records that match the query
     matching_records = collection.find(query)
-    
+    return matching_records
 
     
 
-# get_records(datetime.now() - timedelta(days=12), datetime.now())
+#get_records(datetime.now() - timedelta(days=12), datetime.now())
